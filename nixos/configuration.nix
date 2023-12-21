@@ -2,17 +2,25 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running `nixos-help`).
 
-{ config, pkgs, ... }:
+{ inputs, config, pkgs, ... }:
 
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
 	./vim.nix
+    inputs.home-manager.nixosModules.home-manager
     ];
 	# Added flakes
 	nix.settings.experimental-features = [ "nix-command" "flakes" ];
 	nix.package = pkgs.nixFlakes;
+
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    extraSpecialArgs = {inherit inputs;};
+    users.rizqirazkafi = import ../home.nix;
+  };
 
 
   # Use the GRUB 2 boot loader.
@@ -82,6 +90,8 @@ services.xserver = {
        firefox
        tree
      ];
+     hashedPassword = "$6$EUFPHbidshnzlsxT$40dEHmXhV5HW8.ZAXo3GWAVDLJnClQekUbUnivAoL7QBDlBXDPA8xmzSwb3n.NhEB054DGBAy7z5BLzhF8wGa.";
+
    };
 
   # List packages installed in system profile. To search, run:

@@ -1,21 +1,17 @@
 { lib, ... }:
+# Example to create a bios compatible gpt partition
 {
   disko.devices = {
     disk = {
       vda = {
-        device = "/dev/vda";
+        device = "/dev/disk/by-label/NIXROOT";
         type = "disk";
         content = {
           type = "gpt";
           partitions = {
-            ESP = {
-              type = "EF00";
-              size = "500M";
-              content = {
-                type = "filesystem";
-                format = "vfat";
-                mountpoint = "/boot";
-              };
+            boot = {
+              size = "1M";
+              type = "EF02"; # for grub MBR
             };
             root = {
               size = "100%";
@@ -31,4 +27,3 @@
     };
   };
 }
-

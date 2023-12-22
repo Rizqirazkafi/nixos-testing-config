@@ -9,6 +9,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-colors.url = "github:misterio77/nix-colors";
+    nix-index-database = {
+      url = "github:Mic92/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    disko-url = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, nixpkgs, ... }@inputs:
@@ -23,10 +31,12 @@
     in
     {
       nixosConfigurations = {
-        nixos = nixpkgs.lib.nixosSystem{
-          specialArgs = {inherit inputs system;};
-          modules = [ 
+        nixos = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs system; };
+          modules = [
+            disko.nixosModules.disko
             ./nixos/configuration.nix
+            nix-index-database.nixosModules.nix-index
           ];
         };
       };

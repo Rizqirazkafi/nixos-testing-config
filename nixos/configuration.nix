@@ -9,6 +9,7 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
 	./vim.nix
+  ./disk-config.nix
     inputs.home-manager.nixosModules.home-manager
     ];
 	# Added flakes
@@ -90,9 +91,14 @@ services.xserver = {
        firefox
        tree
      ];
-     hashedPassword = "$6$EUFPHbidshnzlsxT$40dEHmXhV5HW8.ZAXo3GWAVDLJnClQekUbUnivAoL7QBDlBXDPA8xmzSwb3n.NhEB054DGBAy7z5BLzhF8wGa.";
+     openssh.authorizedKeys.keys = [
+       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIH8rh5OxRHsKPT/ic6qA7G3VxqV9SVFW89CdLnVPDJNY rizqirazkafi56@gmail.com"
+     ];
 
    };
+   users.users.root.openssh.authorizedKeys.keys = [
+     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIH8rh5OxRHsKPT/ic6qA7G3VxqV9SVFW89CdLnVPDJNY rizqirazkafi56@gmail.com"
+   ];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget

@@ -9,7 +9,7 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
 	./vim.nix
-  ./disk-config.nix
+  # ./disk-config.nix
     inputs.home-manager.nixosModules.home-manager
     ];
 	# Added flakes

@@ -6,7 +6,5 @@ parted /dev/$1 -- mkpart primary 1MB 100%
 parted /dev/$1 -- set 1 boot on
 mkfs.ext4 -L NIXROOT /dev/$1
 mount /dev/disk/by-label/NIXROOT /mnt
-git clone https://github.com/rizqirazkafi/nixos-testing-config
-cd nixos-testing-config
-  nixos-install --flake .#nixos
+nixos-install --flake .#nixos
 

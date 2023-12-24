@@ -8,3 +8,6 @@ mkfs.ext4 -L NIXROOT /dev/${1}1
 mount /dev/disk/by-label/NIXROOT /mnt
 nixos-install --flake .#nixos
 
+git clone https://github.com/rizqirazkafi/nixos-testing-config /mnt/home/rizqirazkafi/
+
+

@@ -22,6 +22,24 @@
     extraSpecialArgs = {inherit inputs;};
     users.rizqirazkafi = import ../home.nix;
   };
+  programs.tmux = {
+    enable = true;
+    extraConfig = ''
+      set-option -sa terminal-overrides ",xterm*:Tc"
+      # bind <C-Alt-*> to move arround windows
+      bind -n C-M-H next-window
+      bind -n C-M-L previous-window
+      # Set prefix to <C-Space>
+      unbind C-b
+      set -g prefix C-Space
+      bind C-Space send-prefix
+      set -g mouse
+    '';
+    plugins = with pkgs.tmuxPlugins ; [
+      vim-tmux-navigator
+      sensible
+    ];
+  };
 
 
   # Use the GRUB 2 boot loader.
@@ -103,6 +121,9 @@ services.xserver = {
   # List packages installed in system profile. To search, run:
   # $ nix search wget
    environment.systemPackages = with pkgs; [
+     lazygit
+     ansible
+     tmux
      vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
 	neovim
      wget

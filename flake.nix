@@ -23,7 +23,7 @@
     in
     {
       nixosConfigurations = {
-        nixos = nixpkgs.lib.nixosSystem {
+        nixos-vm = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs system; };
           modules = [
             ./nixos/configuration.nix

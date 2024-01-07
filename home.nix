@@ -89,6 +89,8 @@
 
       plugins = with pkgs.vimPlugins; [
         nvim-lspconfig
+        auto-pairs
+        undotree
         {
           plugin = comment-nvim;
           config = toLua "require(\"Comment\").setup()";

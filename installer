@@ -8,7 +8,7 @@ mkfs.ext4 -L NIXROOT /dev/${1}1 &&
 mount /dev/disk/by-label/NIXROOT /mnt &&
 git clone https://github.com/rizqirazkafi/nixos-testing-config /mnt/nixos-testing-config &&
 cd /mnt/nixos-testing-config &&
-  nixos-install --flake .#nixos &&
+  nixos-install --flake .#nixos-vm &&
   cd ..
 echo "Configuration is located under /nixos-testing-config";
 

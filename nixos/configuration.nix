@@ -55,8 +55,8 @@
   boot.loader.grub.device = "/dev/sda"; # or "nodev" for efi only
 
   networking.hostName = "nixos-vm"; # Define your hostname.
-  networking.interfaces.ens18.ipv4.addresses = [{ address = "192.168.30.60"; prefixLength = 25; }];
-  networking.defaultGateway.address = "192.168.30.1";
+  # networking.interfaces.ens18.ipv4.addresses = [{ address = "192.168.30.60"; prefixLength = 25; }];
+  # networking.defaultGateway.address = "192.168.30.1";
   networking.nameservers = [ "1.1.1.1" ];
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.

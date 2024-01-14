@@ -143,9 +143,7 @@
     home-manager
     htop
     alacritty
-    zerotierone
   ];
-  services.zerotierone.enable = true;
   services.qemuGuest.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are

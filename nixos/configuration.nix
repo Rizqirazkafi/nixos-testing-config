@@ -105,6 +105,10 @@
     displayManager.defaultSession = "xfce";
   };
 
+  services.xrdp.enable = true;
+  services.xrdp.defaultWindowManager = "xfce4-session";
+  services.xrdp.openFirewall = true;
+
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
@@ -142,6 +146,7 @@
     zerotierone
   ];
   services.zerotierone.enable = true;
+  services.qemuGuest.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -158,7 +163,7 @@
   services.openssh.ports = [ 9005 ];
 
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 9005 9993 ];
+  networking.firewall.allowedTCPPorts = [ 9005 9993 3389 ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   #  networking.firewall.enable = false;

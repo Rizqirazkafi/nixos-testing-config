@@ -30,9 +30,9 @@ vim.opt.updatetime = 50
 
 vim.opt.colorcolumn = "80"
 vim.opt.clipboard = "unnamedplus"
-vim.g.mkdp_browser = 'firefox'
-vim.g.livepreview_previewer = 'zathura'
-vim.g.livepreview_engine = 'pdflatex'
+vim.g.mkdp_browser = "firefox"
+vim.g.livepreview_previewer = "zathura"
+vim.g.livepreview_engine = "pdflatex"
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
@@ -43,25 +43,25 @@ vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 vim.keymap.set("x", "<leader>p", [["_dP]])
 -- Remap split navigation
-vim.keymap.set('n', '<C-h>', '<C-w>h')
-vim.keymap.set('n', '<C-j>', '<C-w>j')
-vim.keymap.set('n', '<C-k>', '<C-w>k')
-vim.keymap.set('n', '<C-l>', '<C-w>l')
+vim.keymap.set("n", "<C-h>", "<cmd>TmuxNavigateLeft<CR>")
+vim.keymap.set("n", "<C-j>", "<cmd>TmuxNavigateBottom<CR>")
+vim.keymap.set("n", "<C-k>", "<cmd>TmuxNavigateUp<CR>")
+vim.keymap.set("n", "<C-l>", "<cmd>TmuxNavigateRight<CR>")
 -- Adjust split sizes
-vim.keymap.set('n', '<C-left>', '<cmd>vertical res +3<CR>')
-vim.keymap.set('n', '<C-right>', '<cmd>vertical res -3<CR>')
-vim.keymap.set('n', '<C-up>', '<cmd>res +3<CR>')
-vim.keymap.set('n', '<C-down>', '<cmd>res -3<CR>')
+vim.keymap.set("n", "<C-left>", "<cmd>vertical res +3<CR>")
+vim.keymap.set("n", "<C-right>", "<cmd>vertical res -3<CR>")
+vim.keymap.set("n", "<C-up>", "<cmd>res +3<CR>")
+vim.keymap.set("n", "<C-down>", "<cmd>res -3<CR>")
 -- Remap for exiting Nvim terminal
-vim.keymap.set('t', '<Esc>', '<C-\\><C-n>')
+vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
 -- Remap for new tab
-vim.keymap.set('n', '<C-t>', vim.cmd.tabnew)
+vim.keymap.set("n", "<C-t>", vim.cmd.tabnew)
 
-local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
-vim.api.nvim_create_autocmd('TextYankPost', {
-  callback = function()
-    vim.highlight.on_yank()
-  end,
-  group = highlight_group,
-  pattern = '*',
+local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
+vim.api.nvim_create_autocmd("TextYankPost", {
+	callback = function()
+		vim.highlight.on_yank()
+	end,
+	group = highlight_group,
+	pattern = "*",
 })

@@ -5,10 +5,8 @@
   # manage.
   home.username = "rizqirazkafi";
   home.homeDirectory = "/home/rizqirazkafi";
-  imports = [
-    inputs.nix-colors.homeManagerModules.default
-    ./features/alacritty.nix
-  ];
+  imports =
+    [ inputs.nix-colors.homeManagerModules.default ./features/alacritty.nix ];
 
   colorScheme = inputs.nix-colors.colorSchemes.rose-pine;
 
@@ -36,9 +34,9 @@
 
   home.sessionVariables = {
     EDITOR = "nvim";
-    XDG_DATA_DIRS = "$XDG_DATA_DIRS:/usr/share:/var/lib/flatpak/exports/share:$HOME/.local/share/flatpak/exports/share";
+    XDG_DATA_DIRS =
+      "$XDG_DATA_DIRS:/usr/share:/var/lib/flatpak/exports/share:$HOME/.local/share/flatpak/exports/share";
   };
-
 
   # Let Home Manager install and manage itself.
   # programs.home-manager.enable = true;
@@ -50,128 +48,111 @@
     userEmail = "rizqirazkafi56@gmail.com";
   };
 
-
   programs.bash = {
     enable = true;
     shellAliases = {
       ll = "ls -la";
       fanauto = "sudo nbfc set -f 0 -a; sleep 5 && sudo nbfc set -f 1 -a";
       fanhalf = "sudo nbfc set -f 0 -s 50; sleep 5 && sudo nbfc set -f 1 -s 50";
-      fanmax = "sudo nbfc set -f 0 -s 100; sleep 6 && sudo nbfc set -f 1 -s 100";
+      fanmax =
+        "sudo nbfc set -f 0 -s 100; sleep 6 && sudo nbfc set -f 1 -s 100";
       labconnect = "sudo pon lab debug dump logfd 2 nodetach";
     };
     enableCompletion = true;
   };
-  programs.neovim =
-    let
-      toLua = str: "lua << EOF\n${str}\nEOF\n";
-      toLuaFile = file: "lua << EOF\n${builtins.readFile file}\nEOF\n";
-    in
-    {
-      enable = true;
-
-      extraPackages = with pkgs; [
-
-        xclip
-        luajitPackages.lua-lsp
-        rnix-lsp
-        ltex-ls
-        texlab
-        emmet-ls
-        nodePackages.typescript-language-server
-        javascript-typescript-langserver
-        gopls
-        eslint_d
-        marksman
-
-
-      ];
-
-      plugins = with pkgs.vimPlugins; [
-        nvim-lspconfig
-        auto-pairs
-        undotree
-        {
-          plugin = comment-nvim;
-          config = toLua "require(\"Comment\").setup()";
-
-        }
-        {
-          plugin = nvim-lspconfig;
-          config = toLuaFile ./nvim/plugin/lsp.lua;
-
-        }
-        {
-          plugin = rose-pine;
-          config = "colorscheme rose-pine";
-        }
-        neodev-nvim
-        {
-          plugin = nvim-cmp;
-          config = toLuaFile ./nvim/plugin/cmp.lua;
-        }
-        {
-          plugin = telescope-nvim;
-          config = toLuaFile ./nvim/plugin/telescope.lua;
-        }
-        {
-          plugin = harpoon;
-          config = toLuaFile ./nvim/plugin/harpoon.lua;
-        }
-        fidget-nvim
-        which-key-nvim
-        telescope-fzf-native-nvim
-        cmp_luasnip
-        cmp-nvim-lsp
-        luasnip
-        friendly-snippets
-        cmp-latex-symbols
-        latex-box
-        {
-          plugin = gitsigns-nvim;
-          config = toLuaFile ./nvim/plugin/gitsigns.lua;
-        }
-        {
-          plugin = lualine-nvim;
-          config = toLuaFile ./nvim/plugin/lualine.lua;
-        }
-        vim-latex-live-preview
-        {
-          plugin = (nvim-treesitter.withPlugins (p: [
-            p.tree-sitter-nix
-            p.tree-sitter-vim
-            p.tree-sitter-bash
-            p.tree-sitter-lua
-            p.tree-sitter-json
-            p.tree-sitter-latex
-            p.tree-sitter-javascript
-            p.tree-sitter-markdown
-            p.tree-sitter-html
-            p.tree-sitter-css
-            p.tree-sitter-arduino
-          ]));
-          config = toLuaFile ./nvim/plugin/treesitter.lua;
-
-        }
-
-
-        vim-nix
-
-      ];
-
-      extraLuaConfig = ''
-        			${builtins.readFile ./nvim/options.lua}
-
-
-        		'';
-
-
-    };
-
-  xsession = {
+  programs.neovim = let
+    toLua = str: ''
+      lua << EOF
+      ${str}
+      EOF
+    '';
+    toLuaFile = file: ''
+      lua << EOF
+      ${builtins.readFile file}
+      EOF
+    '';
+  in {
     enable = true;
+    extraPackages = with pkgs; [
+      xclip
+      luajitPackages.lua-lsp
+      rnix-lsp
+      emmet-ls
+      nodePackages.typescript-language-server
+      javascript-typescript-langserver
+      gopls
+      eslint_d
+      marksman
+
+    ];
+
+    plugins = with pkgs.vimPlugins; [
+      vim-tmux-navigator
+      nvim-lspconfig
+      auto-pairs
+      undotree
+      {
+        plugin = comment-nvim;
+        config = toLua ''require("Comment").setup()'';
+
+      }
+      {
+        plugin = nvim-lspconfig;
+        config = toLuaFile ./nvim/plugin/lsp.lua;
+
+      }
+      {
+        plugin = rose-pine;
+        config = "colorscheme rose-pine";
+      }
+      neodev-nvim
+      {
+        plugin = nvim-cmp;
+        config = toLuaFile ./nvim/plugin/cmp.lua;
+      }
+      {
+        plugin = telescope-nvim;
+        config = toLuaFile ./nvim/plugin/telescope.lua;
+      }
+      {
+        plugin = harpoon;
+        config = toLuaFile ./nvim/plugin/harpoon.lua;
+      }
+      fidget-nvim
+      which-key-nvim
+      telescope-fzf-native-nvim
+      cmp_luasnip
+      cmp-nvim-lsp
+      luasnip
+      friendly-snippets
+      {
+        plugin = gitsigns-nvim;
+        config = toLuaFile ./nvim/plugin/gitsigns.lua;
+      }
+      {
+        plugin = lualine-nvim;
+        config = toLuaFile ./nvim/plugin/lualine.lua;
+      }
+      {
+        plugin = (nvim-treesitter.withPlugins (p: [
+          p.tree-sitter-nix
+          p.tree-sitter-vim
+          p.tree-sitter-bash
+          p.tree-sitter-lua
+          p.tree-sitter-json
+          p.tree-sitter-javascript
+          p.tree-sitter-markdown
+          p.tree-sitter-html
+          p.tree-sitter-css
+        ]));
+        config = toLuaFile ./nvim/plugin/treesitter.lua;
+      }
+      vim-nix
+    ];
+    extraLuaConfig = "${builtins.readFile ./nvim/options.lua}";
   };
 
+  xsession = { enable = true; };
 
   gtk = {
     enable = true;
@@ -188,6 +169,5 @@
   qt = {
     enable = true;
     style.name = "kvantum";
-
   };
 }

@@ -94,12 +94,10 @@
       {
         plugin = comment-nvim;
         config = toLua ''require("Comment").setup()'';
-
       }
       {
         plugin = nvim-lspconfig;
         config = toLuaFile ./nvim/plugin/lsp.lua;
-
       }
       {
         plugin = rose-pine;

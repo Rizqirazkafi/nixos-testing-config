@@ -118,7 +118,10 @@
         plugin = harpoon;
         config = toLuaFile ./nvim/plugin/harpoon.lua;
       }
-      fidget-nvim
+      {
+        plugin = fidget-nvim;
+        config = toLuaFile ./nvim/plugin/fidget.lua;
+      }
       which-key-nvim
       telescope-fzf-native-nvim
       cmp_luasnip
@@ -132,6 +135,10 @@
       {
         plugin = lualine-nvim;
         config = toLuaFile ./nvim/plugin/lualine.lua;
+      }
+      {
+        plugin = none-ls-nvim;
+        config = toLuaFile ./nvim/plugin/none-ls-nvim.lua;
       }
       {
         plugin = (nvim-treesitter.withPlugins (p: [

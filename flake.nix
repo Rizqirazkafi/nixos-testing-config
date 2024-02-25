@@ -9,6 +9,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-colors.url = "github:misterio77/nix-colors";
+    latex.url = "github:nixos/nixpkgs/2d627a2a704708673e56346fcb13d25344b8eaf3";
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs:

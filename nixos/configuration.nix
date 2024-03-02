@@ -87,6 +87,9 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   nixpkgs.config.allowUnfree = true;
+  environment.variables = {
+    NIX_SSHOPTS = "-p 9005";
+  };
   environment.systemPackages = with pkgs; [
     lazygit
     ansible
@@ -106,10 +109,10 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
-  services.openssh.ports = [ 9005 ];
+  services.openssh.ports = [ 22 ];
 
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 9005 ];
+  networking.firewall.allowedTCPPorts = [ 22 ];
   system.stateVersion = "23.05";
 
 }

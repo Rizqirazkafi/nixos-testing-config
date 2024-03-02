@@ -87,9 +87,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   nixpkgs.config.allowUnfree = true;
-  environment.variables = {
-    NIX_SSHOPTS = "-p 9005";
-  };
+  environment.variables = { NIX_SSHOPTS = "-p 9005"; };
   environment.systemPackages = with pkgs; [
     lazygit
     ansible
@@ -101,7 +99,7 @@
     home-manager
     htop
     alacritty
-    inputs.latex.legacyPackages.x86_64-linux.texliveFull
+    # inputs.latex.legacyPackages.x86_64-linux.texliveFull
   ];
   services.qemuGuest.enable = true;
 

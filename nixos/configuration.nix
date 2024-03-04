@@ -45,7 +45,7 @@
     prefixLength = 25;
   }];
   networking.defaultGateway.address = "192.168.30.1";
-  networking.nameservers = [ "1.1.1.1" ];
+  networking.nameservers = [ "1.1.1.1" "8.8.8.8" ];
   networking.networkmanager.enable = true;
 
   # Set your time zone.

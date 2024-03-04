@@ -40,8 +40,11 @@
   boot.loader.grub.device = "/dev/sda"; # or "nodev" for efi only
 
   networking.hostName = "nixos-vm"; # Define your hostname.
-  # networking.interfaces.ens18.ipv4.addresses = [{ address = "192.168.30.60"; prefixLength = 25; }];
-  # networking.defaultGateway.address = "192.168.30.1";
+  networking.interfaces.ens18.ipv4.addresses = [{
+    address = "192.168.30.60";
+    prefixLength = 25;
+  }];
+  networking.defaultGateway.address = "192.168.30.1";
   networking.nameservers = [ "1.1.1.1" ];
   networking.networkmanager.enable = true;
 

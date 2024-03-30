@@ -14,6 +14,7 @@
   ];
   # Added flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.trusted-users = [ "root" "rizqirazkafi" ];
   nix.package = pkgs.nixFlakes;
   home-manager = {
     useGlobalPkgs = true;
@@ -36,16 +37,11 @@
   };
 
   # Use the systemd-boot
-  boot.loader.systed-boot.enable = true;
-  boot.loader.systed-boot.configurationLimit = 10;
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot.configurationLimit = 10;
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "nixos-vm"; # Define your hostname.
-  networking.interfaces.ens18.ipv4.addresses = [{
-    address = "192.168.30.60";
-    prefixLength = 25;
-  }];
-  networking.defaultGateway.address = "192.168.30.1";
   networking.nameservers = [ "1.1.1.1" "8.8.8.8" ];
   networking.networkmanager.enable = true;
 
@@ -59,17 +55,20 @@
     packages = with pkgs; [ tree ];
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIH8rh5OxRHsKPT/ic6qA7G3VxqV9SVFW89CdLnVPDJNY rizqirazkafi56@gmail.com"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA4BKp6wALZpa0l93oz7GOma8yJ4jY6r/G8H3usLiJ+n rizqirazkafi56@gmail.com"
     ];
 
   };
   users.users.root.openssh.authorizedKeys.keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIH8rh5OxRHsKPT/ic6qA7G3VxqV9SVFW89CdLnVPDJNY rizqirazkafi56@gmail.com"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA4BKp6wALZpa0l93oz7GOma8yJ4jY6r/G8H3usLiJ+n rizqirazkafi56@gmail.com"
   ];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
+    ncdu
     lazygit
     tmux
     vim

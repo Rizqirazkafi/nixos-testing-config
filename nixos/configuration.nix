@@ -35,9 +35,10 @@
     plugins = with pkgs.tmuxPlugins; [ vim-tmux-navigator sensible ];
   };
 
-  # Use the GRUB 2 boot loader.
-  boot.loader.grub.enable = true;
-  boot.loader.grub.device = "/dev/sda"; # or "nodev" for efi only
+  # Use the systemd-boot
+  boot.loader.systed-boot.enable = true;
+  boot.loader.systed-boot.configurationLimit = 10;
+  boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "nixos-vm"; # Define your hostname.
   networking.interfaces.ens18.ipv4.addresses = [{
@@ -51,33 +52,11 @@
   # Set your time zone.
   time.timeZone = "Asia/Jakarta";
 
-  # Enable sound.
-  # sound.enable = true;
-  # hardware.pulseaudio.enable = true;
-  nixpkgs.config.pulseaudio = true;
-
-  services.xserver = {
-    enable = true;
-    desktopManager = {
-      xterm.enable = false;
-      xfce.enable = true;
-
-    };
-    displayManager.defaultSession = "xfce";
-  };
-
-  services.xrdp.enable = true;
-  services.xrdp.defaultWindowManager = "xfce4-session";
-  services.xrdp.openFirewall = true;
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.rizqirazkafi = {
     isNormalUser = true;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-    packages = with pkgs; [ firefox tree ];
+    packages = with pkgs; [ tree ];
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIH8rh5OxRHsKPT/ic6qA7G3VxqV9SVFW89CdLnVPDJNY rizqirazkafi56@gmail.com"
     ];
@@ -93,7 +72,6 @@
   environment.variables = { NIX_SSHOPTS = "-p 9005"; };
   environment.systemPackages = with pkgs; [
     lazygit
-    ansible
     tmux
     vim
     neovim
@@ -101,7 +79,6 @@
     git
     home-manager
     htop
-    alacritty
     # inputs.latex.legacyPackages.x86_64-linux.texliveFull
   ];
   services.qemuGuest.enable = true;

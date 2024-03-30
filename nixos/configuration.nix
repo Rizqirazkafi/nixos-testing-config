@@ -69,7 +69,6 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   nixpkgs.config.allowUnfree = true;
-  environment.variables = { NIX_SSHOPTS = "-p 9005"; };
   environment.systemPackages = with pkgs; [
     lazygit
     tmux

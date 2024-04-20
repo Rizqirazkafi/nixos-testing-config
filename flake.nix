@@ -8,8 +8,6 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # nix-colors.url = "github:misterio77/nix-colors";
-    # latex.url = "github:nixos/nixpkgs/2d627a2a704708673e56346fcb13d25344b8eaf3";
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs:
@@ -23,10 +21,7 @@
       nixosConfigurations = {
         nixos-vm = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs system; };
-          modules = [
-            ./nixos/configuration.nix
-            # nix-index-database.nixosModules.nix-index
-          ];
+          modules = [ ./nixos/configuration.nix ];
         };
       };
     };

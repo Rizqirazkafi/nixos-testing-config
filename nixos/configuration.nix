@@ -51,17 +51,15 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.rizqirazkafi = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" ]; # enable ‘sudo’ for the user.
     packages = with pkgs; [ tree ];
     openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIH8rh5OxRHsKPT/ic6qA7G3VxqV9SVFW89CdLnVPDJNY rizqirazkafi56@gmail.com"
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA4BKp6wALZpa0l93oz7GOma8yJ4jY6r/G8H3usLiJ+n rizqirazkafi56@gmail.com"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPMWLbWrVUvtf2+i4DVKVBCYalLNPuY1xRG2JIt64HHV rizqirazkafi56@gmail.com"
     ];
 
   };
   users.users.root.openssh.authorizedKeys.keys = [
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIH8rh5OxRHsKPT/ic6qA7G3VxqV9SVFW89CdLnVPDJNY rizqirazkafi56@gmail.com"
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA4BKp6wALZpa0l93oz7GOma8yJ4jY6r/G8H3usLiJ+n rizqirazkafi56@gmail.com"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPMWLbWrVUvtf2+i4DVKVBCYalLNPuY1xRG2JIt64HHV rizqirazkafi56@gmail.com"
   ];
 
   # List packages installed in system profile. To search, run:
@@ -77,18 +75,37 @@
     git
     home-manager
     htop
-    # inputs.latex.legacyPackages.x86_64-linux.texliveFull
+    ranger
+    inputs.latex.legacyPackages.x86_64-linux.texliveFull
   ];
   services.qemuGuest.enable = true;
 
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
-  services.openssh.ports = [ 22 ];
+  security.pam.enableSSHAgentAuth = true;
+  services.openssh = {
+    enable = true;
+    banner = ''
+         _____ ________    ___    __  ______  ______
+        / ___// ____/ /   /   |  /  |/  /   |/_  __/
+        \__ \/ __/ / /   / /| | / /|_/ / /| | / /
+       ___/ / /___/ /___/ ___ |/ /  / / ___ |/ /
+      /____/_____/_____/_/  |_/_/  /_/_/  |_/_/
 
+          ____  ___  _________    _   ________
+         / __ \/   |/_  __/   |  / | / / ____/
+        / / / / /| | / / / /| | /  |/ / / __
+       / /_/ / ___ |/ / / ___ |/ /|  / /_/ /
+      /_____/_/  |_/_/ /_/  |_/_/ |_/\____/
+
+    '';
+    ports = [ 9005 ];
+    settings.PasswordAuthentication = false;
+  };
+  # services.openssh.settings.PermitRootLogin = "prohibit-password";
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 22 ];
+  networking.firewall.allowedTCPPorts = [ 9005 80 443 ];
   system.stateVersion = "23.05";
 
 }

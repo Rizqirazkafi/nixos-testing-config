@@ -25,7 +25,7 @@
 
   # Let Home Manager install and manage itself.
   # programs.home-manager.enable = true;
-  services.picom.enable = true;
+  # services.picom.enable = true;
 
   programs.git = {
     enable = true;
@@ -37,6 +37,7 @@
     enable = true;
     shellAliases = { ll = "ls -la"; };
     enableCompletion = true;
+    initExtra = ''echo "Hello, what good shall I do today?"'';
   };
   programs.neovim = let
     toLua = str: ''

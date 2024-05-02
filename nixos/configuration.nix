@@ -11,6 +11,7 @@
     ./vim.nix
     # ./disk-config.nix
     inputs.home-manager.nixosModules.home-manager
+    ./nginx.nix
   ];
   # Added flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -66,7 +67,6 @@
   # $ nix search wget
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
-    ncdu
     lazygit
     tmux
     vim

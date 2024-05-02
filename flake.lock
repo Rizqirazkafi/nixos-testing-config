@@ -39,7 +39,24 @@
     "root": {
       "inputs": {
         "home-manager": "home-manager",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "testing-website": "testing-website"
+      }
+    },
+    "testing-website": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1714651421,
+        "narHash": "sha256-KusYOkUwCgIQfyANyvZfB9/VO9MBquI8SI/TVJD+FuE=",
+        "owner": "rizqirazkafi",
+        "repo": "testing-website",
+        "rev": "c0fc39b315f8a5fe09432a0d4a203757007b5347",
+        "type": "github"
+      },
+      "original": {
+        "owner": "rizqirazkafi",
+        "repo": "testing-website",
+        "type": "github"
       }
     }
   },

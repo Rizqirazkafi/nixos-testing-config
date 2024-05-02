@@ -76,7 +76,6 @@
     home-manager
     htop
     ranger
-    inputs.latex.legacyPackages.x86_64-linux.texliveFull
   ];
   services.qemuGuest.enable = true;
 

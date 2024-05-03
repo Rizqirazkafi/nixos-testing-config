@@ -53,15 +53,14 @@
   in {
     enable = true;
     extraPackages = with pkgs; [
+      # list of lsp
       xclip
       luajitPackages.lua-lsp
       rnix-lsp
-      emmet-ls
-      nodePackages.typescript-language-server
-      javascript-typescript-langserver
-      gopls
-      eslint_d
-      marksman
+      ansible-language-server
+      nodePackage.bash-language-server
+      shfmt
+      ansible-lint
     ];
 
     plugins = with pkgs.vimPlugins; [
@@ -123,14 +122,14 @@
           p.tree-sitter-bash
           p.tree-sitter-lua
           p.tree-sitter-json
-          p.tree-sitter-javascript
-          p.tree-sitter-markdown
           p.tree-sitter-html
           p.tree-sitter-css
+          p.tree-sitter-php
         ]));
         config = toLuaFile ./nvim/plugin/treesitter.lua;
       }
       vim-nix
+      ansible-vim
     ];
     extraLuaConfig = "${builtins.readFile ./nvim/options.lua}";
   };

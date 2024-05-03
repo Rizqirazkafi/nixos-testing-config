@@ -4,9 +4,9 @@ null_ls.setup({
 	debug = true,
 	sources = {
 		null_ls.builtins.formatting.stylua,
-		null_ls.builtins.formatting.gofumpt,
 		null_ls.builtins.formatting.nixfmt,
-		-- null_ls.builtins.completion.gopls,
+		null_ls.builtins.formatting.shfmt,
+		null_ls.builtins.diagnostic.ansiblelint,
 	},
 	on_attach = function(client, bufnr)
 		if client.supports_method("textDocument/formatting") then

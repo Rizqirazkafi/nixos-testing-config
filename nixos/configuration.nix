@@ -55,12 +55,22 @@
     extraGroups = [ "wheel" ]; # enable ‘sudo’ for the user.
     packages = with pkgs; [ tree ];
     openssh.authorizedKeys.keys = [
+      # Nitro
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPMWLbWrVUvtf2+i4DVKVBCYalLNPuY1xRG2JIt64HHV rizqirazkafi56@gmail.com"
+      # nixosvm-efi
+      ''
+        ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOtzb3oMobBQVSza6gjWUMteRTNk+LRNBQqRSx3UrN1V rizqirazkafi56@gmail.com
+      ''
     ];
 
   };
   users.users.root.openssh.authorizedKeys.keys = [
+    # Nitro
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPMWLbWrVUvtf2+i4DVKVBCYalLNPuY1xRG2JIt64HHV rizqirazkafi56@gmail.com"
+    # nixosvm-efi
+    ''
+      ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOtzb3oMobBQVSza6gjWUMteRTNk+LRNBQqRSx3UrN1V rizqirazkafi56@gmail.com
+    ''
   ];
 
   # List packages installed in system profile. To search, run:

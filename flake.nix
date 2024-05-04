@@ -24,7 +24,7 @@
     in {
       nixosConfigurations = {
         nixos-vm = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs system; };
+          specialArgs = { inherit inputs system pkgs; };
           modules = [ ./nixos/configuration.nix ];
         };
       };

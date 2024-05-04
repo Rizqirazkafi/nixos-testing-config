@@ -58,7 +58,7 @@
       luajitPackages.lua-lsp
       rnix-lsp
       ansible-language-server
-      nodePackage.bash-language-server
+      nodePackages.bash-language-server
       shfmt
       ansible-lint
     ];

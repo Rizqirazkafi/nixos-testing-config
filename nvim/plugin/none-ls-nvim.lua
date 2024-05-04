@@ -6,7 +6,7 @@ null_ls.setup({
 		null_ls.builtins.formatting.stylua,
 		null_ls.builtins.formatting.nixfmt,
 		null_ls.builtins.formatting.shfmt,
-		null_ls.builtins.diagnostic.ansiblelint,
+		null_ls.builtins.diagnostics.ansiblelint,
 	},
 	on_attach = function(client, bufnr)
 		if client.supports_method("textDocument/formatting") then

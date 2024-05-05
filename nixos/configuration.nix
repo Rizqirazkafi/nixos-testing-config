@@ -86,6 +86,8 @@
     home-manager
     htop
     ranger
+    ripgrep
+    ansible
   ];
   services.qemuGuest.enable = true;
 

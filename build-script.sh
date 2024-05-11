@@ -1,3 +1,3 @@
 #!/bin/bash
-export NIX_SSHOPTS='-tt';
-time { nixos-rebuild --flake .#nixos-vm --target-host rizqirazkafi@192.168.122.210 --use-remote-sudo switch -L; };
+export NIX_SSHOPTS='-p 9005';
+time { nixos-rebuild --flake .#nixos-vm --target-host root@$1 switch --verbose; };
